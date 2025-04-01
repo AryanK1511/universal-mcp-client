@@ -16,6 +16,7 @@
     },
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
+  "notebook.formatOnSave.enabled": true,
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
