@@ -1,6 +1,9 @@
-def main():
-    print("Hello from client!")
+# client/main.py
+
+from client.components.chat import chat
+from client.components.hero import hero
 
 
-if __name__ == "__main__":
-    main()
+async def main():
+    hero()
+    await chat()
