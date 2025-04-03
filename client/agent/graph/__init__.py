@@ -1,5 +1,6 @@
 # client/agent/graph/__init__.py
 
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 
@@ -11,6 +12,7 @@ class AgentGraph:
     def __init__(self):
         self.react_graph = None
         self.builder = StateGraph(CustomState)
+        self.memory_saver = MemorySaver()
 
     def build_graph(self, all_tools):
         # Add all the tools to the tools node
@@ -29,7 +31,7 @@ class AgentGraph:
         self.builder.add_edge("tools", "assistant")
 
         # Compile the graph
-        self.react_graph = self.builder.compile()
+        self.react_graph = self.builder.compile(checkpointer=self.memory_saver)
 
     def get_graph(self):
         return self.react_graph

@@ -6,6 +6,7 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from client.agent.graph import AgentGraph
 from client.agent.graph.tools import tools
+from client.constants import CONSTANT_THREAD_ID
 
 
 class ReactAgent:
@@ -14,6 +15,7 @@ class ReactAgent:
         self.multi_server_client_params = {}
         self._initialized = False
         self._graph = None
+        self.config = {"configurable": {"thread_id": CONSTANT_THREAD_ID}}
 
     async def init_agent(self):
         if not self._initialized:
@@ -30,6 +32,6 @@ class ReactAgent:
     async def get_agent_response(self, prompt):
         agent = await self.init_agent()
         user_prompt = {"messages": [HumanMessage(content=prompt)]}
-        response = await agent.ainvoke(user_prompt)
+        response = await agent.ainvoke(user_prompt, config=self.config)
         print(f"Response: {response}")
         return response["messages"][-1].content
