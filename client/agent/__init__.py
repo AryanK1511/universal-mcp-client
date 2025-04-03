@@ -32,6 +32,7 @@ class ReactAgent:
     async def get_agent_response(self, prompt):
         agent = await self.init_agent()
         user_prompt = {"messages": [HumanMessage(content=prompt)]}
-        response = await agent.ainvoke(user_prompt, config=self.config)
-        print(f"Response: {response}")
-        return response["messages"][-1].content
+        stream = agent.astream(
+            input=user_prompt, config=self.config, stream_mode=["values"]
+        )
+        return stream

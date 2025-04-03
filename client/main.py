@@ -4,6 +4,6 @@ from client.components.chat import chat
 from client.components.hero import hero
 
 
-def main():
+async def main():
     hero()
-    chat()
+    await chat()
