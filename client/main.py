@@ -1,6 +1,11 @@
+# client/main.py
+
+from client.components.chat import chat
+from client.components.hero import hero
+from client.components.model_selector import model_selector
+
+
 def main():
-    print("Hello from client!")
-
-
-if __name__ == "__main__":
-    main()
+    hero()
+    model_selector()
+    chat()
